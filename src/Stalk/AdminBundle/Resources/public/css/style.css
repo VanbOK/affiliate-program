@@ -1,0 +1,67 @@
+body {
+  padding-top: 50px;
+}
+
+.dropdown-header {
+    color: #31708F;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.dropdown-header:after { 
+    content: ":"  
+}
+
+#map-canvas {
+     width: 90%;
+     height: 400px;
+     margin: 0 auto 20px auto;         
+}
+ 
+.alert {
+    margin-top: 25px;
+}
+
+.table > thead > tr > th, 
+.table > tbody > tr > th, 
+.table > tfoot > tr > th, 
+.table > thead > tr > td, 
+.table > tbody > tr > td, 
+.table > tfoot > tr > td {
+    border-top: 1px solid #fff;
+}
+
+label {
+    font-weight: normal;
+}
+
+
+/*
+* Video
+*/
+
+#video .youtube {
+}
+    
+    #video .youtube img {
+        opacity: 0.8;
+        position: relative;
+        z-index: -1;
+    }
+    
+    #video .youtube a {
+        background: url('../images/play.png') no-repeat center center;
+        display: inline-block;
+    }
+    
+        #video .youtube a:hover {
+            background-image: url('../images/play-hover.png');
+        }
+    
+        #video .youtube a:hover img{
+            opacity: 1;
+        }
+        
+        #video .table-hover > tbody > tr:hover .youtube img{
+            z-index: 1;
+        }

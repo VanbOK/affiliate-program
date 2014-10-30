@@ -1,0 +1,53 @@
+{% extends 'StalkAdminBundle::layout.html.twig' %}
+
+{% block body -%}
+
+    <h2 class="text-info">Создание опции:</h3>
+
+    <form action="{{ path('admin_setting_create') }}" 
+          method="post" {{ form_enctype(form) }}>
+        
+        <input type="hidden" name="_method" value="POST" />
+        
+        <table class="table">
+            
+            <tr>
+                <td class="col-md-3">{{ form_label(form.description) }}</td>
+                <td>
+                    {{ form_errors(form.description) }}
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                </td>
+            </tr> 
+            
+            <tr>
+                <td>{{ form_label(form.optionName) }}</td>
+                <td>
+                    {{ form_errors(form.optionName) }}
+                    {{ form_widget(form.optionName, {'attr': {'class': 'form-control'}}) }}                          
+                </td>
+            </tr>            
+            
+            <tr>
+                <td>{{ form_label(form.optionValue) }}</td>
+                <td>
+                    {{ form_errors(form.optionValue) }}
+                    {{ form_widget(form.optionValue, {'attr': {'class': 'form-control'}}) }}                          
+                </td>
+            </tr>
+
+        </table>
+
+        {{ form_widget(form._token) }}
+
+        <hr/>
+
+        <a href="{{path('admin_setting')}}" class="btn btn-default">
+            <i class="glyphicon glyphicon-arrow-left"></i> Вернуться к списку
+        </a>&nbsp;&nbsp;&nbsp;
+
+        <button type="submit" class="btn btn-primary">
+            <i class="glyphicon glyphicon-ok"></i> Сохранить</button>
+
+    </form>
+
+{% endblock %}

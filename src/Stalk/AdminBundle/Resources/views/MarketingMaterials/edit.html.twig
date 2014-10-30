@@ -1,0 +1,71 @@
+{% extends 'StalkAdminBundle::layout.html.twig' %}
+
+{% form_theme edit_form 'StalkAdminBundle:Form:fields.html.twig' %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {% javascripts
+        '@StalkAdminBundle/Resources/public/js/marketing-materials.js'
+        filter='yui_js'             
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block body -%}
+
+    {% for flashMessage in app.session.flashbag.get('notice-successfully') %}
+
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage|raw }}
+        </div>
+
+    {% endfor %}
+
+    <h2 class="text-info">Маркетинговые материалы</h2>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#links" role="tab" data-toggle="tab">Мои ссылки</a></li>
+        <li><a href="#presentation" role="tab" data-toggle="tab">Презентации продуктов</a></li>
+        <li><a href="#portfolio" role="tab" data-toggle="tab">Портфолио</a></li>
+        <li><a href="#video" role="tab" data-toggle="tab">Видеоролики</a></li>
+        <li><a href="#price" role="tab" data-toggle="tab">Прайс-лист</a></li>
+    </ul>
+
+    {{ form_start(edit_form) }}
+    
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="links">
+                {% include 'StalkAdminBundle:MarketingMaterials:tabs/links.html.twig' %}
+            </div>
+            <div class="tab-pane fade" id="presentation">
+                {% include 'StalkAdminBundle:MarketingMaterials:tabs/presentation.html.twig' %}
+            </div>
+            <div class="tab-pane fade" id="portfolio">
+                {% include 'StalkAdminBundle:MarketingMaterials:tabs/portfolio.html.twig' %}
+            </div>
+            <div class="tab-pane fade" id="video">
+                {% include 'StalkAdminBundle:MarketingMaterials:tabs/video.html.twig' %}
+            </div>
+            <div class="tab-pane fade" id="price">
+                {% include 'StalkAdminBundle:MarketingMaterials:tabs/price.html.twig' %}
+            </div>
+        </div>
+    
+        <table class="table">    
+            {{ form_rest(edit_form) }}            
+        </table>
+    
+        <button type="submit" class="btn btn-primary" style="margin: 0 auto; display: block;">
+            <span class="glyphicon glyphicon-ok"></span> Сохранить
+        </button><br/><br/><br/>
+    
+    {{ form_end(edit_form) }}
+    
+    {{ tinymce_init() }}
+
+{% endblock %}

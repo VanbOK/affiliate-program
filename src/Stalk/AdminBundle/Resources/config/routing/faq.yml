@@ -1,0 +1,30 @@
+faq:
+    path:     /
+    defaults: { _controller: "StalkAdminBundle:Faq:index" }
+
+faq_show:
+    path:     /{id}/show
+    defaults: { _controller: "StalkAdminBundle:Faq:show" }
+
+faq_new:
+    path:     /new
+    defaults: { _controller: "StalkAdminBundle:Faq:new" }
+
+faq_create:
+    path:     /create
+    defaults: { _controller: "StalkAdminBundle:Faq:create" }
+    requirements: { _method: post }
+
+faq_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StalkAdminBundle:Faq:edit" }
+
+faq_update:
+    path:     /{id}/update
+    defaults: { _controller: "StalkAdminBundle:Faq:update" }
+    requirements: { _method: post|put }
+
+faq_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StalkAdminBundle:Faq:delete" }
+    requirements: { _method: post|delete }

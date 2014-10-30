@@ -1,0 +1,137 @@
+{% extends 'StalkAdminBundle::layout.html.twig' %}
+
+{% block body -%}
+
+    <style>
+
+        .alert {
+           margin-top: 25px;
+        }
+        
+        label {
+            font-weight: normal;
+        }
+        
+    </style>
+
+    {% for flashMessage in app.session.flashbag.get('notice-successfully') %}
+
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage }}
+        </div>
+
+    {% endfor %}
+
+    <h2 class="text-info">Редактирование опции:</h3>
+    
+    <form action="{{ path('admin_setting_update', { 'id': entity.id }) }}" 
+          method="post" {{ form_enctype(edit_form) }}>
+        
+        <input type="hidden" name="_method" value="PUT" />
+        
+        <table class="table">
+            
+            <tr>
+                <td class="col-md-2">{{ form_label(edit_form.description) }}</td>
+                <td>
+                    {{ form_errors(edit_form.description) }}
+                    {{ form_widget(edit_form.description, {'attr': {'class': 'form-control'}}) }}                          
+                </td>
+            </tr>
+
+            <tr {% if (app.environment == 'prod') %}style="display:none;{% endif %}">
+                <td>{{ form_label(edit_form.optionName) }}</td>
+                <td>
+                    {{ form_errors(edit_form.optionName) }}
+                    {{ form_widget(edit_form.optionName, {'attr': {'class': 'form-control'}}) }}                          
+                </td>
+            </tr>
+            
+            <tr {% if (app.environment == 'dev') %}style="display:none;{% endif %}">
+                <td>{{ form_label(edit_form.optionName) }}</td>
+                <td>
+                    <p class="text-muted">{{ entity.optionName }}</p>                          
+                </td>
+            </tr>
+            
+            <tr>
+                <td>{{ form_label(edit_form.optionValue) }}</td>
+                <td>
+                    {{ form_errors(edit_form.optionValue) }}
+                    {{ form_widget(edit_form.optionValue, {'attr': {'class': 'form-control'}}) }}                          
+                </td>
+            </tr>
+
+        </table>
+
+        {{ form_widget(edit_form._token) }}
+
+        <hr/>
+
+        <a href="{{path('admin_setting')}}" class="btn btn-default">
+            <i class="glyphicon glyphicon-arrow-left"></i> Вернуться к списку
+        </a>&nbsp;&nbsp;&nbsp;
+
+        <button type="submit" class="btn btn-primary">
+            <i class="glyphicon glyphicon-ok"></i> Сохранить</button>&nbsp;&nbsp;&nbsp;
+
+        {% if (app.environment == 'dev') %}
+            
+            <a href="#deleteModal" role="button" class="btn btn-danger" data-toggle="modal">
+                <i class="glyphicon glyphicon-trash"></i> Удалить
+            </a>
+            
+        {% endif %}
+            
+    </form>
+    
+    <!-- Modal -->
+    <div id="deleteModal" class="modal fade" tabindex="-1" 
+         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+        
+            <form action="{{ path('admin_setting_delete', { 'id': entity.id }) }}" method="post">
+
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" 
+                            aria-hidden="true">x</button>
+
+                    <h4 id="myModalLabel">Удалить опцию</h4>
+
+                </div>
+
+                <div class="modal-body">
+                    <p>Вы действительно хотите удалить опцию?</p>
+
+                    <input type="hidden" name="_method" value="DELETE" />
+
+                    {{ form_widget(delete_form) }}
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Нет</button>
+
+                    <button type="submit" class="btn btn-danger">
+                        Да
+                    </button>
+
+                </div>
+
+            </form>
+                
+            </div>
+
+        </div>
+        
+    </div>
+    
+    <!--End:Modal -->
+
+{% endblock %}

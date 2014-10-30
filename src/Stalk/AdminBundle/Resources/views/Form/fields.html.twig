@@ -1,0 +1,16 @@
+{# Customizing form template #}
+
+{% block form_row %}
+{% spaceless %}
+    <tr>        
+        <td class="col-md-2">{{ form_label(form) }}</td>
+
+        <td>               
+            {{ form_errors(form) }}
+            <div>
+                {{ form_widget(form, {'attr':{'class':'form-control'}}) }}
+            </div>
+        </td>
+    </tr>
+{% endspaceless %}
+{% endblock form_row %}

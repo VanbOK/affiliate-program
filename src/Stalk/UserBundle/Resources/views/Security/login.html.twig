@@ -1,0 +1,113 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<!DOCTYPE html>
+<html lang="en">
+    
+{% block head %}
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="VanbOK">
+        <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+        {% block title %}<title>Партнерская программа SugarTalk</title>{% endblock %}
+
+        {% block stylesheets %}
+
+            {% stylesheets
+                'bundles/stalkaffiliate/css/bootstrap.css'
+                'bundles/stalkuser/css/login.css'
+                filter='cssrewrite, yui_css' %}
+                <link rel="stylesheet" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+
+        {% endblock %} 
+                
+        {% block javascripts %}
+                
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+            
+            {% javascripts
+                '@StalkUserBundle/Resources/public/js/login.js'
+                filter='yui_js'             
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+        {% endblock %} 
+        
+    </head>
+  
+{% endblock %}
+    
+<body>
+    
+    {% block body %}
+    
+        <div class="container">
+            
+            {% block fos_user_content %}
+
+                {% if error %}
+                    <div class="alert alert-danger col-md-4 col-md-offset-4" role="alert">
+                        {{ error|trans }}
+                    </div>
+                {% endif %}
+
+                <form class="form-signin" role="form"
+                      action="{{ path("fos_user_security_check") }}" method="post">
+
+                    <img src="{{ asset('bundles/stalkaffiliate/images/company_logo.png') }}" alt="" class="logo">
+
+                    <p class="title">Партнерская программа</p>
+                    
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                    <label for="username">{{ 'security.login.email'|trans }}</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required="required" autofocus/>
+
+                    <label for="password">{{ 'security.login.password'|trans }}</label>
+                    <input type="password" id="password" name="_password" required="required" class="form-control"/>
+
+                    <div class="checkbox">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                    
+                        <a class="resetting" href="{{path('fos_user_resetting_request')}}">Забыли пароль?</a>
+                    
+                    </div>
+
+                    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-lg btn-primary btn-block"/>
+
+                    <br/>
+                    
+                    <a href="{{path('fos_user_registration_register')}}" class="btn btn-lg btn-danger btn-block">Регистрация</a>
+                    
+                </form>
+            
+                <div class="buttons">
+                    
+                    <img src="{{ asset('bundles/stalkaffiliate/images/company_logo.png') }}" alt="" class="logo">
+                    
+                    <p class="title">Партнерская программа</p>
+                    
+                    <a href="#" class="login btn btn-lg btn-info btn-block">Вход</a>
+                    
+                    <br/>
+                    
+                    <a href="{{path('fos_user_registration_register')}}" class="btn btn-lg btn-danger btn-block">Регистрация</a>
+                    
+                    
+                </div>
+
+            {% endblock fos_user_content %}
+                    
+        </div>
+
+    {% endblock %}
+        
+</body>
+  
+</html>

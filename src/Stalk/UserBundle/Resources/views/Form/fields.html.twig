@@ -1,0 +1,11 @@
+{# Customizing form template #}
+
+{% block form_row %}
+{% spaceless %}
+    <div class="form-group">
+        {{ form_errors(form) }}
+        {{ form_label(form) }}     
+        {{ form_widget(form, {'attr':{'class':'form-control input-sm'}}) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}

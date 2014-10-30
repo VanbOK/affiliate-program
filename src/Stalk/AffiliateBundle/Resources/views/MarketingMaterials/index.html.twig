@@ -1,0 +1,66 @@
+{% extends 'StalkAffiliateBundle::layout.html.twig' %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {% javascripts
+        '@StalkAffiliateBundle/Resources/public/js/jquery.fancybox.js'
+        '@StalkAffiliateBundle/Resources/public/js/script.js'
+        filter='yui_js'             
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+        
+{% block stylesheets %}
+
+    {{ parent() }}
+        
+    {% stylesheets
+        'bundles/stalkaffiliate/css/jquery.fancybox.css'
+        filter='cssrewrite, yui_css' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+{% endblock %}
+
+{% block content %}
+
+    <h4 class="text-info">
+        Ваша партнерская ссылка:
+        <span class="label label-success">
+            http://<url>/?a={{ app.user.refId }}
+        </span>
+    </h4>
+
+    <br/>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#links" role="tab" data-toggle="tab">Мои ссылки</a></li>
+        <li><a href="#presentation" role="tab" data-toggle="tab">Презентации продуктов</a></li>
+        <li><a href="#portfolio" role="tab" data-toggle="tab">Портфолио</a></li>
+        <li><a href="#video" role="tab" data-toggle="tab">Видеоролики</a></li>
+        <li><a href="#price" role="tab" data-toggle="tab">Прайс-лист</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="links">
+            {% include 'StalkAffiliateBundle:MarketingMaterials:tabs/links.html.twig' %}
+        </div>
+        <div class="tab-pane fade" id="presentation">
+            {% include 'StalkAffiliateBundle:MarketingMaterials:tabs/presentation.html.twig' %}
+        </div>
+        <div class="tab-pane fade" id="portfolio">
+            {% include 'StalkAffiliateBundle:MarketingMaterials:tabs/portfolio.html.twig' %}
+        </div>
+        <div class="tab-pane fade" id="video">
+            {% include 'StalkAffiliateBundle:MarketingMaterials:tabs/video.html.twig' %}
+        </div>
+        <div class="tab-pane fade" id="price">
+            {% include 'StalkAffiliateBundle:MarketingMaterials:tabs/price.html.twig' %}
+        </div>
+    </div>    
+
+{% endblock %}

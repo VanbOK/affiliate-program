@@ -1,0 +1,17 @@
+user:
+    path:     /
+    defaults: { _controller: "StalkAdminBundle:User:index" }
+
+user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StalkAdminBundle:User:edit" }
+
+user_update:
+    path:     /{id}/update
+    defaults: { _controller: "StalkAdminBundle:User:update" }
+    requirements: { _method: post|put }
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StalkAdminBundle:User:delete" }
+    requirements: { _method: post|delete }

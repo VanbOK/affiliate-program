@@ -1,0 +1,17 @@
+parameters:
+     stalk_admin.setting.class: Stalk\AdminBundle\Controller\SettingController
+#    stalk_admin.example.class: Stalk\AdminBundle\Example
+
+services:
+#    stalk_admin.example:
+#        class: %stalk_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    stalk_admin_setting:
+        class: %stalk_admin.setting.class%
+        arguments: [ "@?doctrine.orm.entity_manager" ]
+        
+    stalk.twig.stalk_extension:
+        class: Stalk\AdminBundle\Twig\StalkExtension
+        tags:
+            - { name: twig.extension }

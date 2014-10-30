@@ -1,0 +1,63 @@
+{% extends 'StalkAdminBundle::layout.html.twig' %}
+
+{% block body -%}
+
+    {% for flashMessage in app.session.flashbag.get('notice-successfully') %}
+
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage|raw }}
+        </div>
+
+    {% endfor %}
+
+    <h2 class="text-info">Пользователи</h2>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Пользователь</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Компания</th>
+                
+                {% if (app.environment == 'dev') %}
+                    <th>Роли</th>
+                {% endif %}                
+                
+                <th>Последний вход</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>
+                    {% if entity.enabled is empty %}
+                        <span class="glyphicon glyphicon-remove" title="Неактивный пользователь"></span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('user_edit', { 'id': entity.id }) }}" title="Редактировать">
+                        {{ entity.firstname }} {{ entity.surname }}
+                    </a>
+                </td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.phone }}</td>
+                <td>{{ entity.company }}</td>
+                
+                {% if (app.environment == 'dev') %}
+                    <td>
+                        {% for role in entity.roles %}
+                            <small>{{role}}</small><br/>
+                        {% endfor %}
+                    </td>
+                {% endif %}
+                
+                <td>{{ entity.lastLogin|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

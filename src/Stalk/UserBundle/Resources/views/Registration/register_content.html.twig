@@ -1,0 +1,33 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-signin">
+    
+    <img src="{{ asset('bundles/stalkaffiliate/images/company_logo.png') }}" alt="" class="logo">
+    
+    <p class="title">Партнерская программа</p>
+    
+    {{ form_row(form.surname, { 'attr': {'class': 'form-control'} }) }}
+    
+    {{ form_row(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+    
+    {{ form_row(form.email, { 'attr': {'class': 'form-control'} }) }}
+    
+    {{ form_row(form.phone, { 'attr': {'class': 'form-control'} }) }}
+    
+    {{ form_row(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+    
+    {{ form_row(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+
+    {{ form_row(form.company, { 'attr': {'class': 'form-control'} }) }}
+    
+    {{ form_row(form.site, { 'attr': {'class': 'form-control'} }) }}
+        
+    {{ form_rest(form) }}
+    
+    <br/>
+    
+    <div>
+        <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-lg btn-danger btn-block"/>
+    </div>
+    
+</form>

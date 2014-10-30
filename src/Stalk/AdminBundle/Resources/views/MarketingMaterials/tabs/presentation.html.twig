@@ -1,0 +1,112 @@
+<table class="table">
+
+    {{ form_row(edit_form.presentationDescription) }} 
+
+</table>
+
+<hr/>
+
+<table class="table table-hover" id="linksTable">
+
+    <thead>
+        <th class="col-md-3">Файл</th>
+        <th class="col-md-5">Название</th>
+        <th class="col-md-3">Категория</th>
+        <th class="col-md-1"></th>
+    </thead>
+
+    <tbody>
+
+        {% for key, item in edit_form.pdf %}
+           {% set link = entity.pdf.get(loop.index0).link%}
+           {% set image = entity.pdf.get(loop.index0).image%}
+           {{ _self.linkRow(item, link, image) }}
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<a href="#" id="addLink" class="btn btn-info">
+    <span class="glyphicon glyphicon-plus"></span> Добавить PDF
+</a>
+
+{% macro linkRow(item, link, image) %}
+
+    <tr>
+
+        <td>          
+
+            {% if link %}
+
+                {{ form_widget(item.file, { 'attr': {'class': 'hide'} }) }}
+                        
+                <a href="{{ asset(link) }}" target="_blank">
+                    <img src="{{ image }}" style="max-width:127px; max-height:100px;"/>
+                </a>
+            
+                {{ form_widget(item.thumbnail) }}
+            
+            {% else %}
+            
+                <table>
+                    <tr>
+                        <td>{{ form_label(item.file) }}</td>
+                        <td>{{ form_widget(item.file, { 'attr': {'required': 'true'} }) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(item.thumbnail) }}</td>
+                        <td>{{ form_widget(item.thumbnail) }}</td>
+                    </tr>
+                </table>
+
+            {% endif %}
+
+        </td>
+
+        <td>{{ form_widget(item.title, {'attr':{'class':'form-control'}}) }}</td>
+        
+        <td>{{ form_widget(item.category, {'attr':{'class':'form-control'}}) }}</td>
+
+        <td>
+            <a class="deleteRowLink btn btn-danger btn-xs" href="#">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </td>
+
+    </tr>   
+
+{% endmacro %}
+
+
+<script type="text/html" id="linkTmpl">
+    {{ _self.linkRow(edit_form.pdf.vars.prototype) }}
+</script>
+
+<script>
+    $(function() {
+
+        $("#addLink" ).click(function() { 
+
+              var length = $('#linksTable tr').length;
+
+              var row = $('#linkTmpl').html().replace(/(__name__)/g, $('#linksTable tr').length);
+
+              $('#linksTable>tbody').append(row); 
+
+              $('#linksTable>tbody').find('[id $= "_' + length + '_file"]').click();
+
+              return false;
+
+        });
+
+        $('body').on('click', 'a.deleteRowLink', function() { 
+
+              $(this).closest('tr').remove(); 
+
+              return false;
+
+        });
+
+    });
+</script>

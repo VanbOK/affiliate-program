@@ -1,0 +1,41 @@
+{% extends 'StalkAdminBundle::layout.html.twig' %}
+
+{% block body -%}
+
+    {% for flashMessage in app.session.flashbag.get('notice-successfully') %}
+
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage|raw }}
+        </div>
+
+    {% endfor %}
+
+    <h2 class="text-info">Сделки</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-md-1">Сделка</th>
+                <th>Название</th>
+                <th class="col-md-1">Дата</th>                
+                <th class="col-md-2">Статус</th>
+                <th class="col-md-2">Cумма сделки</th>
+                <th>Партнер</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td><a href="{{ path('transaction_edit', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td>{% if entity.created %}{{ entity.created|date('d.m.Y') }}{% endif %}</td>
+                <td>{{ entity.status|rus_val }}</td>
+                <td>{{ entity.amount }}</td>
+                <td>{{ entity.refId }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+news:
+    path:     /
+    defaults: { _controller: "StalkAdminBundle:News:index" }
+
+news_new:
+    path:     /new
+    defaults: { _controller: "StalkAdminBundle:News:new" }
+
+news_create:
+    path:     /create
+    defaults: { _controller: "StalkAdminBundle:News:create" }
+    requirements: { _method: post }
+
+news_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StalkAdminBundle:News:edit" }
+
+news_update:
+    path:     /{id}/update
+    defaults: { _controller: "StalkAdminBundle:News:update" }
+    requirements: { _method: post|put }
+
+news_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StalkAdminBundle:News:delete" }
+    requirements: { _method: post|delete }
+
+news_send_new_news:
+    path:     /send-new-news
+    defaults: { _controller: "StalkAdminBundle:News:sendMailNewNews" }

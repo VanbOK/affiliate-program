@@ -1,0 +1,60 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'StalkUserBundle:Form:fields.html.twig' %}
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    
+    {{ form_errors(form) }}
+    
+    <div class="container-fluid">
+        <div class="row">            
+            <div class="col-md-4">
+                <h4 class="text-info">Мои настройки:</h4>
+                {{ form_row(form.email) }}
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.surname) }}                
+                <label for="">Пароль:</label><br/>
+                <a href="#" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+                    &nbsp;<i class="glyphicon glyphicon-wrench"></i>&nbsp;&nbsp;&nbsp;{{ 'resetting.reset.profile_submit'|trans }}&nbsp;&nbsp;
+                </a>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-info">&nbsp;</h4>
+                {{ form_row(form.phone) }}
+                {{ form_row(form.company) }}
+                {{ form_row(form.site) }}
+            </div>   
+            <div class="col-md-4">
+                <h4 class="text-info">Способы получения денег:</h4>
+                {{ form_row(form.webMoneyR) }}
+                {{ form_row(form.yandexMoney) }} 
+            </div> 
+        </div>
+           
+        <hr>
+        
+        <div class="row"> 
+           <div class="col-md-2 col-md-offset-4"> 
+               {{ form_widget(form) }}
+               <button type="submit" class="btn btn-info">
+                   <i class="glyphicon glyphicon-ok"></i> {{ 'profile.edit.submit'|trans }}
+               </button>
+           </div>
+        </div>
+        
+        <br/><br/>
+        
+    </div>
+    
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                {{ render(url('fos_user_change_password')) }}
+            </div>
+        </div>
+    </div>
+</div>

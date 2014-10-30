@@ -1,0 +1,34 @@
+{% extends 'StalkAffiliateBundle::layout.html.twig' %}
+
+{% form_theme form 'StalkAdminBundle:Form:fields.html.twig' %}
+
+{% block content %}
+
+    <div class="col-md-12">
+        <h4 class="text-info">Обратная связь</h4>
+        <p>Введите, пожалуйста, свои данные и текст сообщения:</p>
+    </div>
+
+    <div class="col-md-4">
+    
+        {{ form_start(form) }}
+
+            {{ form_row(form.ip, {'value': app.request.getClientIp()}) }}
+        
+            {{ form_row(form.firstname) }}
+        
+            {{ form_row(form.email, {'value': app.user.email|default('')}) }}
+        
+            {{ form_rest(form) }} 
+        
+            <br/>
+        
+            <button type="submit" class="btn btn-info" style="margin:0 auto; display: block;">
+                <span class="glyphicon glyphicon-share-alt"></span> Отправить
+            </button>
+
+        {{ form_end(form) }}
+        
+    </div>
+
+{% endblock %}

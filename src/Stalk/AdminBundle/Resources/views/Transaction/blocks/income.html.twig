@@ -1,0 +1,85 @@
+<div id="income">
+    
+    <table class="table" id="incomeTable">
+
+        <thead>
+            <th class="col-md-2">Сумма платежа</th>
+            <th class="col-md-2">Предполагаемая дата закрытия сделки</th>
+            <th class="col-md-2">Статус</th>
+            <th></th>
+        </thead>
+
+        <tbody>
+
+            {% for key, item in edit_form.income %}
+               {{ _self.incomeRow(item) }}
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <a href="#" id="addIncome" class="btn btn-info">
+        <span class="glyphicon glyphicon-usd"></span> Добавить платеж
+    </a>
+
+    {% macro incomeRow(item) %}
+
+        <tr>
+
+            <td>
+                {{ form_widget(item.payment, {'attr':{'class':'form-control'}}) }}
+            </td>
+
+            <td>
+                {{ form_widget(item.closeDate.day) }}
+                {{ form_widget(item.closeDate.month) }}
+                {{ form_widget(item.closeDate.year) }}
+            </td>
+
+            <td>
+                {{ form_widget(item.status, {'attr':{'class':'form-control'}}) }}
+            </td>
+
+            <td>
+                <a class="deleteIncomeLink btn btn-danger btn-xs" href="#">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </td>
+
+        </tr>   
+
+    {% endmacro %}
+
+
+    <script type="text/html" id="incomeTmpl">
+        {{ _self.incomeRow(edit_form.income.vars.prototype) }}
+    </script>
+
+    <script>
+        $(function() {
+
+            $("#addIncome" ).click(function() { 
+
+                  var length = $('#incomeTable tr').length;
+
+                  var row = $('#incomeTmpl').html().replace(/(__name__)/g, length);
+
+                  $('#incomeTable tbody').append(row); 
+
+                  return false;
+
+            });
+
+            $('body').on('click', 'a.deleteIncomeLink', function() { 
+
+                  $(this).closest('tr').remove(); 
+
+                  return false;
+
+            });
+
+        });
+    </script>
+    
+</div><br/><br/>

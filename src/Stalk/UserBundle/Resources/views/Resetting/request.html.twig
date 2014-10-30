@@ -1,0 +1,51 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<!DOCTYPE html>
+<html lang="en">
+    
+{% block head %}
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="VanbOK">
+        <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+        {% block title %}<title>Партнерская программа SugarTalk</title>{% endblock %}
+
+        {% block stylesheets %}
+
+            {% stylesheets
+                'bundles/stalkaffiliate/css/bootstrap.css'
+                'bundles/stalkuser/css/request.css'
+                filter='cssrewrite, yui_css' %}
+                <link rel="stylesheet" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+
+        {% endblock %} 
+        
+    </head>
+  
+{% endblock %}
+    
+<body>
+    
+    {% block body %}
+    
+        <div class="container">
+            
+            {% block fos_user_content %}
+
+                {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+
+            {% endblock fos_user_content %}
+                    
+        </div>
+
+    {% endblock %}
+        
+</body>
+  
+</html>
+

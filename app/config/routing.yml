@@ -1,0 +1,11 @@
+stalk_user:
+    resource: "@StalkUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+stalk_affiliate:
+    resource: "@StalkAffiliateBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+stalk_affiliate_admin:
+    resource: "@StalkAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin

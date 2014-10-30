@@ -1,0 +1,17 @@
+transaction:
+    path:     /
+    defaults: { _controller: "StalkAdminBundle:Transaction:index" }
+
+transaction_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StalkAdminBundle:Transaction:edit" }
+
+transaction_update:
+    path:     /{id}/update
+    defaults: { _controller: "StalkAdminBundle:Transaction:update" }
+    requirements: { _method: post|put }
+
+transaction_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StalkAdminBundle:Transaction:delete" }
+    requirements: { _method: post|delete }

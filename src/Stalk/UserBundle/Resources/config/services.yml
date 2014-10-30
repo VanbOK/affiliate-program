@@ -1,0 +1,21 @@
+parameters:
+#    stalk_user.example.class: Stalk\UserBundle\Example
+
+services:
+    stalk_user.registration.form.type:
+        class: Stalk\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: stalk_user_registration }
+            
+    stalk_user.profile.form.type:
+        class: Stalk\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: stalk_user_profile }
+            
+    stalk_user.registration_confirmed:
+        class: Stalk\UserBundle\EventListener\RegistrationConfirmedListener
+        arguments: ["@service_container"]
+        tags:
+            - { name: kernel.event_subscriber }

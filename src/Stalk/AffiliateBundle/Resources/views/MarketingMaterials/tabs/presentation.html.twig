@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-5">
+        <div class="input-group">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+            <input class="form-control input-sm searchPdf" type="text" placeholder="Поиск...">
+        </div>
+    </div>
+        
+    <div class="col-md-3">
+        <select class="form-control input-sm filterPdf">
+            <option value="">- Выберите категорию -</option>
+            <option value="информация об услугах">информация об услугах</option>
+            <option value="кейсы">кейсы</option>
+            <option value="IP-телефония">IP-телефония</option>
+        </select>
+    </div>
+</div>
+
+<br/>
+
+{{ entity.presentationDescription|raw }}
+
+<div class="row">
+    
+    {% for pdf in entity.pdf %}
+    
+        <div class="col-md-3 block-pdf" data-category="{{ pdf.category }}"> 
+            <a href="{{ pdf.link }}" class="pdf" title="Скачать" target="_blank">               
+                <img src="{{pdf.image}}">   
+                <span class="text-info">{{ pdf.title }}</span>
+            </a>
+        </div>
+    
+    {% endfor %}
+    
+</div>
+
+<br/>

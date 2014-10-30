@@ -1,0 +1,59 @@
+{% trans_default_domain "FOSUserBundle" %}
+
+<!-- Modal -->
+<div class="modal" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    
+    <div class="modal-dialog">
+        
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="confirmationModalLabel">Шаг 3: Подтверждение информации</h4>
+            </div>
+            
+            <div class="modal-body">
+                
+                <table style="border-collapse: separate; border-spacing:10px;">
+                    <tr>
+                        <td><strong>{{ form.firstname.vars.label|trans }}</strong></td>
+                        <td class="firstname"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ form.surname.vars.label|trans }}</strong></td>
+                        <td class="surname"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ form.email.vars.label|trans }}</strong></td>
+                        <td class="email"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ form.phone.vars.label|trans }}</strong></td>
+                        <td class="phone"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ form.company.vars.label|trans }}</strong></td>
+                        <td class="company"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ form.paymentMethod.vars.label|trans }}</strong></td>
+                        <td class="paymentMethod"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ form.payment.vars.label|trans }}</strong></td>
+                        <td class="payment"></td>
+                    </tr>
+                </table>
+                
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default backContactModal" data-dismiss="modal"><span class="glyphicon glyphicon-chevron-left"></span> Проверить еще раз</button>
+                <button type="button" class="btn btn-primary confirmationSend"><span class="glyphicon glyphicon-ok"></span> Подтвердить</button>
+            </div>
+            
+        </div>
+            
+    </div>
+        
+</div>

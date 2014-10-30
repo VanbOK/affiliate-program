@@ -1,0 +1,99 @@
+<table class="table">
+
+    {{ form_row(edit_form.portfolioDescription) }} 
+
+</table>
+
+<hr/>
+
+<table class="table table-hover" id="linksTableImage">
+            
+    <thead>
+        <th class="col-md-3">Изображение</th>
+        <th class="col-md-5">Название</th>
+        <th></th>
+    </thead>
+
+    <tbody>
+
+        {% for key, item in edit_form.image %}
+           {% set image = entity.image.get(loop.index0).image %}
+           {{ _self.imageRow(item, image) }}
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<a href="#" id="addImage" class="btn btn-info">
+    <span class="glyphicon glyphicon-plus"></span> Добавить изображение
+</a>
+
+{% macro imageRow(item, value) %}
+
+    <tr>
+
+        <td>          
+
+            {% if value %}
+
+                {{ form_widget(item.file, { 'attr': {'class': 'hide'} }) }}
+
+                <a href="{{ asset(value) }}" target="_blank">
+
+                    <img src="{{ asset(value) }}" class="img-thumbnail" width="250px">
+
+                </a>
+
+            {% else %}
+
+                {{ form_widget(item.file, { 'attr': {'required': 'true'} }) }}
+
+            {% endif %}
+
+        </td>
+
+        <td>{{ form_widget(item.title, {'attr':{'class':'form-control'}}) }}</td>
+
+        <td>
+            <a class="deleteRowLink btn btn-danger btn-xs" href="#">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </td>
+
+    </tr>   
+
+{% endmacro %}
+
+
+<script type="text/html" id="imageTmpl">
+    {{ _self.imageRow(edit_form.image.vars.prototype) }}
+</script>
+
+<script>
+    $(function() {
+
+        $("#addImage" ).click(function() { 
+
+             var length = $('#linksTableImage tr').length;
+
+              var row = $('#imageTmpl').html().replace(/(__name__)/g, $('#linksTableImage tr').length);
+
+              $('#linksTableImage tbody').append(row); 
+
+              $('#linksTableImage tbody').find('[id $= "_' + length + '_file"]').click();
+
+              return false;
+
+        });
+
+        $('body').on('click', 'a.deleteRowLink', function() { 
+
+              $(this).closest('tr').remove(); 
+
+              return false;
+
+        });
+
+    });
+</script>

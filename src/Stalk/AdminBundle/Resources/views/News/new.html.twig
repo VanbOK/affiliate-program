@@ -1,0 +1,31 @@
+{% extends 'StalkAdminBundle::layout.html.twig' %}
+
+{% form_theme form 'StalkAdminBundle:Form:fields.html.twig' %}
+
+{% block body -%}
+
+    <h3>
+        <span class="text-info">Добавление новости: </span>
+    </h3>
+    
+    {{ form_start(form) }}
+
+        <table class="table">
+            {{ form(form) }}
+        </table>
+
+        <a href="{{ path('news') }}" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span> Вернуться к списку
+        </a>&nbsp;&nbsp;&nbsp;
+
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-ok"></span> Создать
+        </button>&nbsp;&nbsp;&nbsp; 
+
+        <br/><br/>
+    
+    {{ form_end(form) }}
+        
+    {{ tinymce_init() }}
+
+{% endblock %}

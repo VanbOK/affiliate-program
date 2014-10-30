@@ -1,0 +1,106 @@
+<table class="table">
+
+    {{ form_row(edit_form.videoDescription) }} 
+
+</table>
+
+<hr/>
+
+<table class="table table-hover" id="linksTableVideo">
+            
+    <thead>
+        <th class="col-md-2">Миниатюра (200x120)</th>
+        <th class="col-md-3">URL видео(Youtube)</th>
+        <th class="col-md-6">Описание/Категория</th>
+        <th class="col-md-1"></th>
+    </thead>
+
+    <tbody>
+
+        {% for key, item in edit_form.video %}
+           {% set thumbnail = entity.video.get(loop.index0).thumbnail %}
+           {{ _self.urlRow(item, thumbnail) }}
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<a href="#" id="addVideo" class="btn btn-info">
+    <span class="glyphicon glyphicon-plus"></span> Добавить видео
+</a>
+
+{% macro urlRow(item, thumbnail) %}
+
+    <tr>
+        
+        <td>
+            {% if thumbnail %}
+                <div class="col-md-3 youtube">
+                    <a href="{{ item.url.vars.value }}" target="_blank">
+                        <img src="{{ thumbnail }}" 
+                             alt="" class="img-rounded" width="200px" height="120px">
+                    </a>
+                </div>
+            {% endif %}
+                
+            {{ form_widget(item.file) }}
+                                
+        </td>
+
+        <td>
+
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-link"></span></div>
+                {{ form_widget(item.url, {'attr':{'class':'form-control'}}) }}
+              </div>
+            </div>
+
+        </td>
+
+        <td>
+            {{ form_widget(item.title, {'attr':{'class':'form-control'}}) }}<br/>
+            {{ form_widget(item.category, {'attr':{'class':'form-control'}}) }}
+        </td>
+
+        <td>
+            <a class="deleteRowLink btn btn-danger btn-xs" href="#">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </td>
+
+    </tr>   
+
+{% endmacro %}
+
+
+<script type="text/html" id="urlTmpl">
+    {{ _self.urlRow(edit_form.video.vars.prototype) }}
+</script>
+
+<script>
+    $(function() {
+
+        $("#addVideo" ).click(function() { 
+
+             var length = $('#linksTableVideo tr').length;
+
+              var row = $('#urlTmpl').html().replace(/(__name__)/g, $('#linksTableVideo tr').length);
+
+              $('#linksTableVideo tbody').append(row); 
+
+              return false;
+
+        });
+
+        $('body').on('click', 'a.deleteRowLink', function() { 
+
+              $(this).closest('tr').remove(); 
+
+              return false;
+
+        });
+
+    });
+</script>

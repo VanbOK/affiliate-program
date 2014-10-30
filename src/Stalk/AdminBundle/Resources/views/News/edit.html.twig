@@ -1,0 +1,84 @@
+{% extends 'StalkAdminBundle::layout.html.twig' %}
+
+{% form_theme edit_form 'StalkAdminBundle:Form:fields.html.twig' %}
+
+{% block body -%}
+
+    {% for flashMessage in app.session.flashbag.get('notice-successfully') %}
+
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage }}
+        </div>
+
+    {% endfor %}
+
+    <h3>
+        <span class="text-info">Редактирование новости: </span>
+        <span class="text-muted">«{{ entity.title }}»</span>
+    </h3>
+
+    {{ form_start(edit_form) }}
+
+        <table class="table">
+            {{ form_rest(edit_form) }}            
+        </table>
+
+        <a href="{{ path('news') }}" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span> Вернуться к списку
+        </a>&nbsp;&nbsp;&nbsp;
+        
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-ok"></span> Сохранить
+        </button>&nbsp;&nbsp;&nbsp;  
+        
+        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+            <span class="glyphicon glyphicon-trash"></span> Удалить
+        </a> 
+        
+        <br/><br/>
+
+    {{ form_end(edit_form) }}
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                {{ form_start(delete_form) }}
+
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        <h4 class="modal-title" id="myModalLabel">Удалить новость</h4>
+
+                    </div>
+
+                    <div class="modal-body">
+                        Вы действительно хотите удалить новость?
+
+                        <input type="hidden" name="_method" value="DELETE" />
+
+                        {{ form_widget(delete_form) }}
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Нет</button>
+                        <button type="submit" class="btn btn-danger">Да</button>
+                    </div>
+
+                {{ form_end(delete_form) }}
+
+            </div>
+
+        </div>
+
+    </div> 
+        
+    {{ tinymce_init() }}
+    
+{% endblock %}

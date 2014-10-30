@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+{% block head %}
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="VanbOK">
+        <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+        {% block title %}<title></title>{% endblock %}
+        {% block keywords %}<meta name="keywords" content="" />{% endblock %}
+        {% block description %}<meta name="description" content="" />{% endblock %}
+
+        {% block stylesheets %}
+
+            {% stylesheets
+                'bundles/stalkaffiliate/css/bootstrap.css'
+                'bundles/stalkaffiliate/css/blog.css'
+                filter='cssrewrite, yui_css' %}
+                <link rel="stylesheet" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+
+        {% endblock %}
+
+        {% block javascripts %}
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+            
+            {% javascripts
+                '@StalkAffiliateBundle/Resources/public/js/bootstrap.js'
+                filter='yui_js'             
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+                
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+              <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+              <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
+
+        {% endblock %} 
+        
+    </head>
+  
+{% endblock %}
+    
+<body>
+    
+    {% block body %}
+    
+        {% block header %}
+
+            <div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}                        
+                        <div class="dropdown pull-right">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle navbar-text">{{ app.user.firstname }} {{ app.user.surname }}</a>
+                            <ul aria-labelledby="dLabel" role="menu" class="dropdown-menu">
+                                {% if is_granted("ROLE_ADMIN") %}                        
+                                    <li>
+                                        <a href="{{ path('stalk_admin_homepage') }}">
+                                            <span class="glyphicon glyphicon-th-large"></span> Администрировать
+                                        </a>
+                                    </li>                   
+                                {% endif %}
+                                <li>
+                                    <a href="{{ path('fos_user_security_logout') }}">
+                                        <span class="glyphicon glyphicon-log-out"></span> Выйти
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>                        
+                    {% endif %}
+                    
+                    <!--<ul class="nav navbar-nav navbar-right">
+                      <li><a href="#">Dashboard</a></li>
+                      <li><a href="#">Settings</a></li>
+                      <li><a href="#">Profile</a></li>
+                      <li><a href="#">Help</a></li>
+                    </ul>-->
+                        
+                </div>
+              </div>
+            </div>
+    
+        {% endblock %}
+
+        <div class="container-fluid">
+        
+            <div class="row">
+                
+                {% block sidebar %}
+                
+                    <div class="col-sm-3 col-md-2 sidebar">                        
+                        {{ knp_menu_render('StalkAffiliateBundle:Builder:mainMenu', {'allow_safe_labels': true}) }}                        
+                    </div>
+                
+                {% endblock %}
+
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    
+                    {% for type, messages in app.session.flashbag.all() %}
+                        {% for key, message in messages %}
+                            <div class="alert alert-{{ type }}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message|trans({}, 'FOSUserBundle') }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    
+                    {% block content %}{% endblock %}
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+
+    {% endblock %}
+
+</body>
+  
+</html>

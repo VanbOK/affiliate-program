@@ -1,0 +1,35 @@
+{% extends 'StalkAffiliateBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <h4 class="text-info">Новости</h4>
+
+    {% for entity in entities %}
+
+        <div class="news">
+
+            <a href="{{ path('stalk_affiliate_news_show', { 'slug': entity.slug }) }}">
+                <strong>{{entity.title}}</strong>
+            </a>
+            
+            {% if entity.id in newNewsId %}
+                &nbsp;&nbsp;<span class="new">New!</span>
+            {% endif %}
+            
+            <p class="text-muted"><small>{{entity.updated|date('Y-m-d')}}</small></p>
+
+            <p>{{entity.intro|raw}}</p>
+
+            <a href="{{ path('stalk_affiliate_news_show', { 'slug': entity.slug }) }}" class="more">Подробнее...</a>
+            
+            <div class="item-separator"></div>
+
+        </div>
+
+    {% endfor %}
+
+    <div style="text-align:center;">
+        {{ knp_pagination_render(entities, 'StalkAffiliateBundle:News:pagination.html.twig') }}
+    </div>
+
+{% endblock %}

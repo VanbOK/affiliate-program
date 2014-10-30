@@ -1,0 +1,27 @@
+body {
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.logo {
+    margin: 10px auto 0px auto;
+    display: block;
+}
+
+label.required:after {
+    content: '*';
+    color: red;
+}
+
+.title {
+    color:#2B9ACB;
+    font-size: 22px;
+    text-align: center;
+    margin: 0 0 20px 0;
+}

@@ -1,0 +1,49 @@
+stalk_affiliate_homepage:
+    path:     /
+    defaults: { _controller: StalkAffiliateBundle:Default:index }
+    
+stalk_affiliate_news:
+    path:     /news
+    defaults: { _controller: StalkAffiliateBundle:News:index }
+
+stalk_affiliate_news_show:
+    pattern:  /news/{slug}
+    defaults: { _controller: StalkAffiliateBundle:News:view }
+    
+stalk_affiliate_faq:
+    path:     /faq
+    defaults: { _controller: StalkAffiliateBundle:Faq:index }
+    
+# Feedback    
+stalk_affiliate_feedback:
+    path:     /feedback
+    defaults: { _controller: StalkAffiliateBundle:Feedback:index }
+    
+stalk_affiliate_feedback_create:
+    path:     /feedback/create
+    defaults: { _controller: "StalkAffiliateBundle:Feedback:create" }
+    requirements: { _method: post }
+    
+#Marketing Materials
+stalk_affiliate_marketing_materials:
+    path:     /marketing-materials
+    defaults: { _controller: StalkAffiliateBundle:MarketingMaterials:index }
+    
+#Transaction
+stalk_affiliate_transaction:
+    path:     /transaction/create
+    defaults: { _controller: StalkAffiliateBundle:Transaction:create }
+    requirements: { _method: post }
+    
+stalk_affiliate_transaction_list:
+    path:     /transaction
+    defaults: { _controller: StalkAffiliateBundle:Transaction:index }
+    
+# Statistic
+stalk_affiliate_statistic:
+    path:     /stat
+    defaults: { _controller: StalkAffiliateBundle:Statistic:index }
+    
+stalk_affiliate_get_json_stat:
+    path:     /stat/get
+    defaults: { _controller: StalkAffiliateBundle:Statistic:getJsonStat }

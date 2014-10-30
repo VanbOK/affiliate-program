@@ -1,0 +1,17 @@
+{% extends 'StalkAffiliateBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <h3 class="text-muted">{{entity.title}}</h3>
+
+    <p class="text-muted"><small>{{entity.updated|date('Y-m-d')}}</small></p>
+
+    <p>{{entity.description|raw}}</p>
+    
+    <br/>
+    
+    <a href="{{ path('stalk_affiliate_news') }}" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span> Вернуться к списку новостей
+    </a><br/><br/>
+
+{% endblock %}

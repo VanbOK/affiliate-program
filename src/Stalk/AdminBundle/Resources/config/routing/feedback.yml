@@ -1,0 +1,12 @@
+feedback:
+    path:     /
+    defaults: { _controller: "StalkAdminBundle:Feedback:index" }
+
+feedback_show:
+    path:     /{id}/show
+    defaults: { _controller: "StalkAdminBundle:Feedback:show" }
+
+feedback_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StalkAdminBundle:Feedback:delete" }
+    requirements: { _method: post|delete }

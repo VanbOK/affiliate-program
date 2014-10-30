@@ -1,0 +1,24 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+    
+    <img src="{{ asset('bundles/stalkaffiliate/images/company_logo.png') }}" alt="" class="logo">
+    
+    <p class="title">Партнерская программа</p>
+    
+    <div>
+        {% if invalid_username is defined %}
+
+            <div class="alert alert-danger" role="alert">
+                <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+            </div>
+            
+        {% endif %}
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="username" required="required" class="form-control"/>
+    </div>
+    <br/>
+    <div>
+        <input type="submit" value="{{ 'resetting.request.submit'|trans }}" class="btn btn-lg btn-primary btn-block"/>
+    </div>
+</form>

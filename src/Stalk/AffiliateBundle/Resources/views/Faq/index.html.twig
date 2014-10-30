@@ -1,0 +1,28 @@
+{% extends 'StalkAffiliateBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div class="panel-group" id="accordion">
+
+        {% for entity in entities %}
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{loop.index}}">
+                            <span class="text-primary">{{entity.question}}</span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse{{loop.index}}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        {{entity.answer|raw}}
+                    </div>
+                </div>
+            </div> 
+
+        {% endfor %}
+        
+    </div>
+
+{% endblock %}

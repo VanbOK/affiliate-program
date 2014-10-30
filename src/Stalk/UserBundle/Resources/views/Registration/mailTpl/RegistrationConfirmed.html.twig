@@ -1,0 +1,6 @@
+<p>
+    Зарегистрирован новый партнер: 
+    <a href="{{ app.request.getSchemeAndHttpHost() }}{{path('user_edit', {'id': user.id})}}">
+        {{user.surname}} {{user.firstname}}
+    </a>
+</p>

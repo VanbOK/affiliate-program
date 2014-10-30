@@ -1,0 +1,23 @@
+{{ entity.portfolioDescription|raw }}
+
+<br/>
+
+<div class="row">
+
+    {% for img in entity.image %}
+    
+        <a href="{{ img.image }}" class="img fancybox" data-fancybox-group="gallery" title="{{ img.title }}">
+            <div class="col-md-3"> 
+                <img src="{{ img.image }}" alt="" class="img-rounded" width="140px" height="140px">
+            </div>
+        </a>
+    
+        {% if loop.index % 4 == 0 %}
+            </div><br/><div class="row">
+        {% endif %}
+    
+    {% endfor %}
+    
+</div>
+
+<br/>

@@ -1,0 +1,88 @@
+{% extends 'StalkAdminBundle::layout.html.twig' %}
+
+{% block body -%}
+
+    <h3>
+        <span class="text-info">Заявка: </span>
+        <span class="text-muted">«{{ entity.firstname }}»</span>
+    </h3>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Имя:</th>
+                <td>{{ entity.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Телефон:</th>
+                <td>{{ entity.phone }}</td>
+            </tr>
+            <tr>
+                <th>Сообщение:</th>
+                <td>{{ entity.message }}</td>
+            </tr>
+            <tr>
+                <th>IP:</th>
+                <td>{{ entity.ip }}</td>
+            </tr>
+            <tr>
+                <th>Дата создания:</th>
+                <td>{{ entity.updated|date('d.m.Y H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('feedback') }}" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span> Вернуться к списку
+    </a>&nbsp;&nbsp;&nbsp;  
+
+    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+        <span class="glyphicon glyphicon-trash"></span> Удалить
+    </a> 
+
+    <br/><br/>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                {{ form_start(delete_form) }}
+
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        <h4 class="modal-title" id="myModalLabel">Удалить заявку</h4>
+
+                    </div>
+
+                    <div class="modal-body">
+                        Вы действительно хотите удалить заявку?
+
+                        <input type="hidden" name="_method" value="DELETE" />
+
+                        {{ form_widget(delete_form) }}
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Нет</button>
+                        <button type="submit" class="btn btn-danger">Да</button>
+                    </div>
+
+                {{ form_end(delete_form) }}
+
+            </div>
+
+        </div>
+
+    </div> 
+    
+{% endblock %}

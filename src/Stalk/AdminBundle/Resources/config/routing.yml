@@ -1,0 +1,31 @@
+stalk_admin_homepage:
+    path:     /
+    defaults: { _controller: StalkAdminBundle:Default:index }
+    
+stalk_user_user:
+    resource: "@StalkAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+    
+StalkAdminBundle_news:
+    resource: "@StalkAdminBundle/Resources/config/routing/news.yml"
+    prefix:   /news
+    
+StalkAdminBundle_faq:
+    resource: "@StalkAdminBundle/Resources/config/routing/faq.yml"
+    prefix:   /faq
+    
+StalkAdminBundle_feedback:
+    resource: "@StalkAdminBundle/Resources/config/routing/feedback.yml"
+    prefix:   /feedback
+    
+StalkAdminBundle_setting:
+    resource: "@StalkAdminBundle/Resources/config/routing/setting.yml"
+    prefix:   /setting
+    
+StalkAdminBundle_marketing_materials:
+    resource: "@StalkAdminBundle/Resources/config/routing/marketingmaterials.yml"
+    prefix:   /marketing-materials
+    
+StalkAdminBundle_transaction:
+    resource: "@StalkAdminBundle/Resources/config/routing/transaction.yml"
+    prefix:   /transaction

@@ -1,0 +1,7 @@
+parameters:
+#    stalk_affiliate.example.class: Stalk\AffiliateBundle\Example
+
+services:
+#    stalk_affiliate.example:
+#        class: %stalk_affiliate.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,113 @@
+{% extends 'StalkAffiliateBundle::layout.html.twig' %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {% javascripts
+        '@StalkAffiliateBundle/Resources/public/js/transaction.js'
+        filter='yui_js'             
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block content %}
+
+    <h4 class="text-info">Сделки</h4>
+
+    <table class="table table-hover table-bordered" id="income">
+        <thead>
+            <tr>
+                <th class="col-md-1">Сделка</th>
+                <th class="col-md-2">Дата</th>
+                <th class="col-md-2">Статус</th>
+                <th>Cумма сделки</th>
+                <th>Доход</th>                
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for entity in entities %}
+                <tr>
+                    <td>{{entity.id}}</td>
+                    <td>{% if entity.created %}{{ entity.created|date('d.m.Y') }}{% endif %}</td>
+                    <td>{{entity.status|rus_val}}</td>
+                    <td>{{entity.amount}}</td>
+                    <td>
+                        {% set count = '' %}
+                        {% for item in entity.income %}                        
+                            {% set count = count + item.payment %}                                                    
+                        {% endfor %}      
+                            
+                        {% if count %}
+                            
+                            <a href="#" class="toogle-income"><span class="glyphicon glyphicon-folder-close"></span> {{ count }}</a>
+
+                            
+                            
+                            </td></tr>
+                    
+                            <tr class="income">                                
+                                <td colspan="5">
+                                
+                                    <table class="table table-hover table-bordered" style="background:#E8E8E8; margin: 0;">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-md-3"></th>
+                                                <th class="col-md-2">Сумма платежа</th>
+                                                <th class="col-md-4">Предполагаемая дата закрытия сделки</th>
+                                                <th>Состояние выплаты</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for item in entity.income %}
+                                                <tr {% if item.status == 'payment' %}class="success"{% endif %}>
+                                                    <td>{{ loop.index }} платеж</td>
+                                                    <td>{{ item.payment }}</td>
+                                                    <td>{% if item.closeDate %}{{ item.closeDate|date('Y-m-d') }}{% endif %}</td>
+                                                    <td>
+                                                        {% if item.status == 'payment' %}
+                                                            <a href="#" data-toggle="modal" data-target="#paymentModal" data-payment="{{ item.payment }}">получить!</a>
+                                                        {% else %}
+                                                            {{item.status|rus_val}}
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %} 
+
+                                        </tbody>
+                                    </table>
+                                
+                                </td>
+                            </tr>                   
+                        {% else %}
+                            0*
+                        {% endif %}
+                            
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    
+    <p>* - сумма дохода партнера определится автоматически после перехода клиента в статус "активен"</p>
+
+    {% form_theme form 'StalkAdminBundle:Form:fields.html.twig' %}
+    
+    {{form_start(form)}}
+    
+        {% include 'StalkAffiliateBundle:Transaction:modal/payment.html.twig' %}
+
+        {% include 'StalkAffiliateBundle:Transaction:modal/contact.html.twig' %}
+
+        {% include 'StalkAffiliateBundle:Transaction:modal/confirmation.html.twig' %}
+    
+    {{form_end(form)}}
+    
+    {% include 'StalkAffiliateBundle:Transaction:modal/successful.html.twig' %}
+    
+{% endblock %}

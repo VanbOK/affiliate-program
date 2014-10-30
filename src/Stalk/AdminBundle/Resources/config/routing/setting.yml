@@ -1,0 +1,30 @@
+admin_setting:
+    pattern:  /
+    defaults: { _controller: "StalkAdminBundle:Setting:index" }
+
+admin_setting_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "StalkAdminBundle:Setting:show" }
+
+admin_setting_new:
+    pattern:  /new
+    defaults: { _controller: "StalkAdminBundle:Setting:new" }
+
+admin_setting_create:
+    pattern:  /create
+    defaults: { _controller: "StalkAdminBundle:Setting:create" }
+    requirements: { _method: post }
+
+admin_setting_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "StalkAdminBundle:Setting:edit" }
+
+admin_setting_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "StalkAdminBundle:Setting:update" }
+    requirements: { _method: post|put }
+
+admin_setting_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "StalkAdminBundle:Setting:delete" }
+    requirements: { _method: post|delete }

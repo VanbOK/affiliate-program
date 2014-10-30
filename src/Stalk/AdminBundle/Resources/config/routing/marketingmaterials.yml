@@ -1,0 +1,8 @@
+marketing-materials_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StalkAdminBundle:MarketingMaterials:edit" }
+
+marketing-materials_update:
+    path:     /{id}/update
+    defaults: { _controller: "StalkAdminBundle:MarketingMaterials:update" }
+    requirements: { _method: post|put }

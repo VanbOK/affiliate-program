@@ -1,0 +1,11 @@
+{% extends "StalkUserBundle:Registration:register.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <br/>
+    <div class="alert alert-success" role="alert">
+        <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    </div>
+    
+{% endblock fos_user_content %}

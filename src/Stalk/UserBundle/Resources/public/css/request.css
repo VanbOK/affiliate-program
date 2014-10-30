@@ -1,0 +1,23 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.fos_user_resetting_request {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.logo {
+    margin: 20px auto 0px auto;
+    display: block;
+}
+
+.title {
+    color:#2B9ACB;
+    font-size: 22px;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
